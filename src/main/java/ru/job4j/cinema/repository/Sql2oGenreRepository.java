@@ -2,6 +2,7 @@ package ru.job4j.cinema.repository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
@@ -9,6 +10,7 @@ import ru.job4j.cinema.model.Genre;
 
 import java.util.Optional;
 
+@Repository
 public class Sql2oGenreRepository implements GenreRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Sql2oGenreRepository.class.getName());
@@ -61,6 +63,20 @@ public class Sql2oGenreRepository implements GenreRepository {
                     """;
             Query query = connection.createQuery(sql);
             Genre genre = query.addParameter("id", id)
+                    .executeAndFetchFirst(Genre.class);
+            return Optional.ofNullable(genre);
+        }
+    }
+
+    @Override
+    public Optional<Genre> findByName(String name) {
+        try (Connection connection = sql2o.open()) {
+            String sql = """
+                    select * from genres
+                    where name = :name
+                    """;
+            Query query = connection.createQuery(sql);
+            Genre genre = query.addParameter("name", name)
                     .executeAndFetchFirst(Genre.class);
             return Optional.ofNullable(genre);
         }

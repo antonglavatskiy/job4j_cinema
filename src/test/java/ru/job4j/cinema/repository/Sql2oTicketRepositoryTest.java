@@ -71,4 +71,12 @@ class Sql2oTicketRepositoryTest {
         Ticket savedTicket = sql2oTicketRepository.findBySessionAndPlace(sessionId, row, place).get();
         assertThat(ticket1).usingRecursiveComparison().isEqualTo(savedTicket);
     }
+
+    @Test
+    public void whenSaveTicketThenFindById() {
+        Ticket ticket = sql2oTicketRepository.save(
+                new Ticket(1, 5, 5, 1)).get();
+        Ticket savedTicket = sql2oTicketRepository.findById(ticket.getId()).get();
+        assertThat(ticket).usingRecursiveComparison().isEqualTo(savedTicket);
+    }
 }

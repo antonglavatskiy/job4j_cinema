@@ -58,6 +58,13 @@ class Sql2oGenreRepositoryTest {
     }
 
     @Test
+    public void whenSaveGenreThenFindByName() {
+        Genre genre = sql2oGenreRepository.save(new Genre("name")).get();
+        Genre savedGenre = sql2oGenreRepository.findByName(genre.getName()).get();
+        assertThat(genre).usingRecursiveComparison().isEqualTo(savedGenre);
+    }
+
+    @Test
     public void whenSaveTwoGenresWithEqualsNamesThenEmpty() {
         Genre genre1 = new Genre("name1");
         Genre genre2 = new Genre("name1");

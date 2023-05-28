@@ -1,10 +1,10 @@
-package ru.job4j.cinema.repository;
+package ru.job4j.cinema.service;
 
 import ru.job4j.cinema.model.Genre;
 
 import java.util.Optional;
 
-public interface GenreRepository {
+public interface GenreService {
     Optional<Genre> save(Genre genre);
     boolean deleteById(int id);
     Optional<Genre> findById(int id);

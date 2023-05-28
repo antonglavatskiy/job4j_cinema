@@ -1,5 +1,6 @@
 package ru.job4j.cinema.repository;
 
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
@@ -7,6 +8,7 @@ import ru.job4j.cinema.model.Hall;
 
 import java.util.Optional;
 
+@Repository
 public class Sql2oHallRepository implements HallRepository {
 
     private final Sql2o sql2o;

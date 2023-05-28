@@ -2,6 +2,7 @@ package ru.job4j.cinema.repository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
@@ -9,6 +10,7 @@ import ru.job4j.cinema.model.Ticket;
 
 import java.util.Optional;
 
+@Repository
 public class Sql2oTicketRepository implements TicketRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Sql2oTicketRepository.class.getName());
@@ -57,6 +59,21 @@ public class Sql2oTicketRepository implements TicketRepository {
                     .addParameter("sessionId", sessionId)
                     .addParameter("row", row)
                     .addParameter("place", place);
+            Ticket ticket = query.setColumnMappings(Ticket.COLUMN_MAPPING)
+                    .executeAndFetchFirst(Ticket.class);
+            return Optional.ofNullable(ticket);
+        }
+    }
+
+    @Override
+    public Optional<Ticket> findById(int id) {
+        try (Connection connection = sql2o.open()) {
+            String sql = """
+                    select * from tickets
+                    where id = :id
+                    """;
+            Query query = connection.createQuery(sql)
+                    .addParameter("id", id);
             Ticket ticket = query.setColumnMappings(Ticket.COLUMN_MAPPING)
                     .executeAndFetchFirst(Ticket.class);
             return Optional.ofNullable(ticket);

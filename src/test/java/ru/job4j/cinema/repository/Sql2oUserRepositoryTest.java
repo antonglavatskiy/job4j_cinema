@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
+import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 
 import javax.sql.DataSource;
@@ -67,5 +68,13 @@ class Sql2oUserRepositoryTest {
         assertThat(sql2oUserRepository.save(user2)).isEmpty();
         User savedUser = sql2oUserRepository.findByEmailAndPassword(email, "pass1").get();
         assertThat(user1).usingRecursiveComparison().isEqualTo(savedUser);
+    }
+
+    @Test
+    public void whenSaveUserThenFindById() {
+        User user = sql2oUserRepository.save(
+                new User("name", "test@test.ru", "pass")).get();
+        User savedUser = sql2oUserRepository.findById(user.getId()).get();
+        assertThat(user).usingRecursiveComparison().isEqualTo(savedUser);
     }
 }
