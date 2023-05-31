@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 public class SessionDto {
     private int id;
     private FilmDto filmDto;
-    private Hall hall;
+    private HallDto hallDto;
     private LocalDateTime start;
     private LocalDateTime end;
     private int price;
 
-    public SessionDto(int id, FilmDto filmDto, Hall hall, LocalDateTime start, LocalDateTime end, int price) {
+    public SessionDto(int id, FilmDto filmDto, HallDto hallDto, LocalDateTime start, LocalDateTime end, int price) {
         this.id = id;
         this.filmDto = filmDto;
-        this.hall = hall;
+        this.hallDto = hallDto;
         this.start = start;
         this.end = end;
         this.price = price;
@@ -37,12 +37,12 @@ public class SessionDto {
         this.filmDto = filmDto;
     }
 
-    public Hall getHall() {
-        return hall;
+    public HallDto getHallDto() {
+        return hallDto;
     }
 
-    public void setHall(Hall hall) {
-        this.hall = hall;
+    public void setHallDto(HallDto hallDto) {
+        this.hallDto = hallDto;
     }
 
     public LocalDateTime getStart() {

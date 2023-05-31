@@ -2,8 +2,8 @@ package ru.job4j.cinema.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
+import ru.job4j.cinema.dto.HallDto;
 import ru.job4j.cinema.dto.SessionDto;
-import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Session;
 import ru.job4j.cinema.repository.SessionRepository;
 
@@ -29,14 +29,14 @@ public class SimpleSessionService implements SessionService {
     @Override
     public Optional<Session> save(SessionDto sessionDto) {
         Optional<FilmDto> optionalFilmDto = filmService.getFilmById(sessionDto.getFilmDto().getId());
-        Optional<Hall> optionalHall = hallService.findById(sessionDto.getHall().getId());
-        if (optionalFilmDto.isEmpty() || optionalHall.isEmpty()) {
+        Optional<HallDto> optionalHallDto = hallService.getHallById(sessionDto.getHallDto().getId());
+        if (optionalFilmDto.isEmpty() || optionalHallDto.isEmpty()) {
             return Optional.empty();
         }
         FilmDto filmDto = optionalFilmDto.get();
-        Hall hall = optionalHall.get();
+        HallDto hallDto = optionalHallDto.get();
         Session session = sessionRepository.save(
-                new Session(filmDto.getId(), hall.getId(),
+                new Session(filmDto.getId(), hallDto.getId(),
                         sessionDto.getStart(), sessionDto.getEnd(), sessionDto.getPrice()));
         return Optional.of(session);
     }
@@ -71,8 +71,8 @@ public class SimpleSessionService implements SessionService {
 
     private SessionDto saveSessionDto(Session session) {
         Optional<FilmDto> optionalFilmDto = filmService.getFilmById(session.getFilmId());
-        Optional<Hall> optionalHall = hallService.findById(session.getHallId());
+        Optional<HallDto> optionalHallDto = hallService.getHallById(session.getHallId());
         return new SessionDto(session.getId(), optionalFilmDto.get(),
-                optionalHall.get(), session.getStart(), session.getEnd(), session.getPrice());
+                optionalHallDto.get(), session.getStart(), session.getEnd(), session.getPrice());
     }
 }

@@ -77,6 +77,6 @@ public class SimpleFilmService implements FilmService {
         return new FilmDto(film.getId(), film.getName(),
                 film.getDescription(), film.getYear(),
                 film.getMinimalAge(), film.getDuration(),
-                optionalGenre.get().getName());
+                optionalGenre.get().getName(), film.getFileId());
     }
 }
