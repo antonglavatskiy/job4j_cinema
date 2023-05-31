@@ -1,7 +1,5 @@
 package ru.job4j.cinema.dto;
 
-import ru.job4j.cinema.model.Hall;
-
 import java.time.LocalDateTime;
 
 public class SessionDto {

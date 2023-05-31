@@ -1,6 +1,5 @@
 package ru.job4j.cinema.dto;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class HallDto {

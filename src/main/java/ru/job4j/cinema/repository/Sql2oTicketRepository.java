@@ -37,10 +37,7 @@ public class Sql2oTicketRepository implements TicketRepository {
             ticket.setId(generatedKey);
             return Optional.ofNullable(ticket);
         } catch (Exception e) {
-            String message = """
-                    "Не удалось приобрести билет на заданное место. Вероятно оно уже занято. 
-                    Перейдите на страницу бронирования билетов и попробуйте снова."
-                    """;
+            String message = "Билет уже куплен";
             LOGGER.error(message, e);
         }
         return Optional.empty();

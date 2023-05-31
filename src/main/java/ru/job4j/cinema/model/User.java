@@ -7,21 +7,21 @@ public class User {
 
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
-            "full_name", "name",
+            "full_name", "fullName",
             "email", "email",
             "password", "password"
     );
 
     private int id;
-    private String name;
+    private String fullName;
     private String email;
     private String password;
 
     public User() {
     }
 
-    public User(String name, String email, String password) {
-        this.name = name;
+    public User(String fullName, String email, String password) {
+        this.fullName = fullName;
         this.email = email;
         this.password = password;
     }
@@ -34,12 +34,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {

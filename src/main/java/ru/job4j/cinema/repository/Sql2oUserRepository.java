@@ -26,10 +26,10 @@ public class Sql2oUserRepository implements UserRepository {
         try (Connection connection = sql2o.open()) {
             String sql = """
                     insert into users (full_name, email, password)
-                    values (:name, :email, :password)
+                    values (:fullName, :email, :password)
                     """;
             Query query = connection.createQuery(sql)
-                    .addParameter("name", user.getName())
+                    .addParameter("fullName", user.getFullName())
                     .addParameter("email", user.getEmail())
                     .addParameter("password", user.getPassword());
             int generatedKey = query.executeUpdate().getKey(Integer.class);

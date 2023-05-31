@@ -22,7 +22,7 @@ public class AuthorizationFilter extends HttpFilter {
         }
         boolean userLoggedIn = request.getSession().getAttribute("user") != null;
         if (!userLoggedIn) {
-            var loginPageUrl = request.getContextPath() + "/users/login";
+            String loginPageUrl = request.getContextPath() + "/users/login";
             response.sendRedirect(loginPageUrl);
             return;
         }
@@ -30,6 +30,6 @@ public class AuthorizationFilter extends HttpFilter {
     }
 
     private boolean isAlwaysPermitted(String uri) {
-        return uri.startsWith("/tickets/one");
+        return uri.startsWith("/tickets/bye") || uri.startsWith("/tickets/one");
     }
 }
