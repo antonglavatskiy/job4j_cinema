@@ -1,5 +1,6 @@
 package ru.job4j.cinema.service;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.dto.HallDto;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+@ThreadSafe
 @Service
 public class SimpleSessionService implements SessionService {
 
@@ -71,7 +73,13 @@ public class SimpleSessionService implements SessionService {
 
     private SessionDto saveSessionDto(Session session) {
         Optional<FilmDto> optionalFilmDto = filmService.getFilmById(session.getFilmId());
+        if (optionalFilmDto.isEmpty()) {
+            throw new RuntimeException("Фильм не найден");
+        }
         Optional<HallDto> optionalHallDto = hallService.getHallById(session.getHallId());
+        if (optionalHallDto.isEmpty()) {
+            throw new RuntimeException("Зал не найден");
+        }
         return new SessionDto(session.getId(), optionalFilmDto.get(),
                 optionalHallDto.get(), session.getStart(), session.getEnd(), session.getPrice());
     }

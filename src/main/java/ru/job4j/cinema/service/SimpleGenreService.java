@@ -1,11 +1,13 @@
 package ru.job4j.cinema.service;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Genre;
 import ru.job4j.cinema.repository.GenreRepository;
 
 import java.util.Optional;
 
+@ThreadSafe
 @Service
 public class SimpleGenreService implements GenreService {
 

@@ -1,5 +1,6 @@
 package ru.job4j.cinema.service;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FileDto;
 import ru.job4j.cinema.dto.FilmDto;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+@ThreadSafe
 @Service
 public class SimpleFilmService implements FilmService {
 
@@ -74,6 +76,9 @@ public class SimpleFilmService implements FilmService {
 
     private FilmDto saveFilmDto(Film film) {
         Optional<Genre> optionalGenre = genreService.findById(film.getGenreId());
+        if (optionalGenre.isEmpty()) {
+            throw new RuntimeException("Неизвестный жанр");
+        }
         return new FilmDto(film.getId(), film.getName(),
                 film.getDescription(), film.getYear(),
                 film.getMinimalAge(), film.getDuration(),

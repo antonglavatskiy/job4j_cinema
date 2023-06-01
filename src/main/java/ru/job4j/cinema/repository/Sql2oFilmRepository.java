@@ -1,5 +1,6 @@
 package ru.job4j.cinema.repository;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
@@ -9,6 +10,7 @@ import ru.job4j.cinema.model.Film;
 import java.util.Collection;
 import java.util.Optional;
 
+@ThreadSafe
 @Repository
 public class Sql2oFilmRepository implements FilmRepository {
 

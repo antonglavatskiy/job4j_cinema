@@ -1,5 +1,6 @@
 package ru.job4j.cinema.repository;
 
+import net.jcip.annotations.ThreadSafe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -7,9 +8,9 @@ import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.User;
-
 import java.util.Optional;
 
+@ThreadSafe
 @Repository
 public class Sql2oUserRepository implements UserRepository {
 

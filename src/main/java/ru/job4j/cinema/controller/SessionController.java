@@ -1,25 +1,22 @@
 package ru.job4j.cinema.controller;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.dto.SessionDto;
 import ru.job4j.cinema.service.SessionService;
-import ru.job4j.cinema.service.TicketService;
-
 import java.util.Optional;
 
+@ThreadSafe
 @Controller
 @RequestMapping("/sessions")
 public class SessionController {
 
     private final SessionService sessionService;
 
-    private final TicketService ticketService;
-
-    public SessionController(SessionService sessionService, TicketService ticketService) {
+    public SessionController(SessionService sessionService) {
         this.sessionService = sessionService;
-        this.ticketService = ticketService;
     }
 
     @GetMapping
