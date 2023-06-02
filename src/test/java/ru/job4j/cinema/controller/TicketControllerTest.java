@@ -70,7 +70,7 @@ class TicketControllerTest {
         String message = "Сеанс не найден";
         Exception expectedException = new RuntimeException(message);
         when(ticketService.save(ticket)).thenReturn(Optional.of(ticket));
-        when(sessionService.getSessionById(any(Integer.class))).thenReturn(Optional.empty());
+        when(sessionService.getSessionById(sessionDto.getId())).thenReturn(Optional.empty());
 
         Model model = new ConcurrentModel();
         String view = ticketController.byeTicket(model, ticket);
@@ -79,5 +79,4 @@ class TicketControllerTest {
         assertThat(view).isEqualTo("errors/404");
         assertThat(actualExceptionMessage).isEqualTo(expectedException.getMessage());
     }
-
 }

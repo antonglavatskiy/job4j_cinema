@@ -49,7 +49,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void whenRegisterUserThenGetErrorPageWithMessage() {
+    public void whenRegisterUserThenGetPageWithErrorMessage() {
         User user = new User("fullName", "email", "pass");
         Exception expectedException = new RuntimeException("Пользователь с такой почтой уже существует");
         when(userService.save(any())).thenReturn(Optional.empty());

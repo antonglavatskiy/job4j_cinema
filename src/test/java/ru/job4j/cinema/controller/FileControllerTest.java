@@ -3,7 +3,6 @@ package ru.job4j.cinema.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import ru.job4j.cinema.dto.FileDto;
 import ru.job4j.cinema.service.FileService;
 import java.util.Optional;
