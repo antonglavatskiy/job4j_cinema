@@ -35,7 +35,7 @@ public class Sql2oUserRepository implements UserRepository {
                     .addParameter("password", user.getPassword());
             int generatedKey = query.executeUpdate().getKey(Integer.class);
             user.setId(generatedKey);
-            return Optional.ofNullable(user);
+            return Optional.of(user);
         } catch (Exception e) {
             LOGGER.error("Пользователь с такой почтой уже существует", e);
         }

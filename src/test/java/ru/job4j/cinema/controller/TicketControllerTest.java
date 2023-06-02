@@ -59,7 +59,7 @@ class TicketControllerTest {
         String view = ticketController.byeTicket(model, ticket);
         Object actualExceptionMessage = model.getAttribute("message");
 
-        assertThat(view).isEqualTo("errors/404");
+        assertThat(view).isEqualTo("errors/409");
         assertThat(actualExceptionMessage).isEqualTo(expectedException.getMessage());
     }
 

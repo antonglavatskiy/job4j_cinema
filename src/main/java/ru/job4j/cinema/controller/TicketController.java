@@ -35,7 +35,7 @@ public class TicketController {
                     Перейдите на страницу бронирования билетов и попробуйте снова.
                     """;
             model.addAttribute("message", message);
-            return "errors/404";
+            return "errors/409";
         }
         Optional<SessionDto> optionalSessionDto = sessionService.getSessionById(ticket.getSessionId());
         if (optionalSessionDto.isEmpty()) {

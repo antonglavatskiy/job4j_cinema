@@ -56,9 +56,9 @@ class UserControllerTest {
 
         Model model = new ConcurrentModel();
         String view = userController.registerUser(user, model);
-        Object actualExceptionMessage = model.getAttribute("message");
+        Object actualExceptionMessage = model.getAttribute("error");
 
-        assertThat(view).isEqualTo("errors/404");
+        assertThat(view).isEqualTo("users/register");
         assertThat(actualExceptionMessage).isEqualTo(expectedException.getMessage());
     }
 
